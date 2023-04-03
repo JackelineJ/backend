@@ -1,6 +1,11 @@
+const fs = require('fs');
+
 class ProductManager {
-    constructor() {
+    constructor(productArchive) {
         this.products = [];
+        const jsonData = fs.readFileSync('./productArchive.json', 'utf-8');
+        const data = JSON.parse(jsonData);
+        this.products.push(...data);
     }
 
     addProducts(title, description, price, thumbnail, code, stock) {
@@ -16,8 +21,10 @@ class ProductManager {
             return;
         }
 
+        const newProductId = this.products.length + 1;
+
         const product = {
-            id: this.products.length + 1,
+            id: newProductId,
             title: title,
             description: description,
             price: price,
@@ -26,6 +33,10 @@ class ProductManager {
             stock: stock
         };
         this.products.push(product);
+
+        fs.writeFileSync('productArchive.json', JSON.stringify(this.products, null, 2));
+
+        console.log(`Product with ID ${newProductId} has been added`);
     }
 
     getProducts() {
