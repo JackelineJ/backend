@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 class ProductManager {
-    constructor(productArchive) {
+    constructor() {
         this.products = [];
         const jsonData = fs.readFileSync('./productArchive.json', 'utf-8');
         const data = JSON.parse(jsonData);
@@ -95,7 +95,9 @@ class ProductManager {
     }
 }
 
+
 const productManager = new ProductManager();
+/*
 console.log(productManager.getProducts()); // This return the empty array because there are no products yet
 
 productManager.addProducts('producto prueba', 'Este es un producto prueba', 200);
@@ -116,3 +118,4 @@ console.log(productManager.updateProduct(1));
 
 productManager.deleteProduct(1); //This will delete the product that has 1 as id
 productManager.deleteProduct(2); // This will return an error because there is no product 2
+*/
